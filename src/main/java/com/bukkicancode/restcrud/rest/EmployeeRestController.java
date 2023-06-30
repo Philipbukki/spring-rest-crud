@@ -5,13 +5,12 @@ import com.bukkicancode.restcrud.entity.Employee;
 import com.bukkicancode.restcrud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @Autowired
     public EmployeeRestController(EmployeeService employeeService) {
@@ -21,8 +20,7 @@ public class EmployeeRestController {
 
     @GetMapping("/employees")
     public List<Employee> findAll() {
-        List<Employee> employees = employeeService.findAll();
-        return employees;
+       return employeeService.findAll();
     }
 
     @GetMapping("/employees/{employeeId}")
@@ -38,9 +36,7 @@ public class EmployeeRestController {
     @PostMapping("/employees")
     public Employee addEmployee(@RequestBody Employee employee) {
 
-        Employee theEmployee = employeeService.save(employee);
-
-        return theEmployee;
+        return employeeService.save(employee);
 
     }
 
